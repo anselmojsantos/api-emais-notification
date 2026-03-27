@@ -18,6 +18,12 @@ app.get('/', async (request, reply) => {
 });
 
 const PORT = process.env.PORT ? Number(process.env.PORT) : 3000
-app.listen({ port: PORT }, () => {
-  console.log(`🚀 Servidor rodando em http://localhost:${PORT}`)
+const HOST = process.env.HOST || '0.0.0.0'
+
+app.listen({ port: PORT, host: HOST }, (err, address) => {
+  if (err) {
+    console.error(err)
+    process.exit(1)
+  }
+  console.log(`🚀 Servidor rodando em ${address}`)
 })
