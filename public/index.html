@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tagarelinha</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f5f5f5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .container {
+      text-align: center;
+      padding: 20px;
+    }
+
+    .logo {
+      font-size: 48px;
+      margin-bottom: 12px;
+    }
+
+    h1 {
+      font-size: 32px;
+      color: #1a1a2e;
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      font-size: 15px;
+      color: #888;
+      margin-bottom: 48px;
+    }
+
+    .cards {
+      display: flex;
+      gap: 24px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      padding: 40px 32px;
+      width: 220px;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      text-decoration: none;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 28px rgba(0,0,0,0.12);
+    }
+
+    .card .icon {
+      font-size: 40px;
+      margin-bottom: 16px;
+    }
+
+    .card h2 {
+      font-size: 18px;
+      color: #1a1a2e;
+      margin-bottom: 8px;
+    }
+
+    .card p {
+      font-size: 13px;
+      color: #888;
+    }
+
+    .card.primary {
+      background: #4f46e5;
+    }
+
+    .card.primary h2 {
+      color: #fff;
+    }
+
+    .card.primary p {
+      color: #c7d2fe;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="logo">💬</div>
+    <h1>Bem-vindo ao Tagarelinha</h1>
+    <p class="subtitle">Escolha uma opção para continuar</p>
+
+    <div class="cards">
+      <a href="/login.html" class="card primary">
+        <div class="icon">🔑</div>
+        <h2>Entrar</h2>
+        <p>Já tenho uma conta</p>
+      </a>
+
+      <a href="/register.html" class="card">
+        <div class="icon">✏️</div>
+        <h2>Cadastrar</h2>
+        <p>Quero criar uma conta</p>
+      </a>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,21 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "./generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id           String   @id @default(uuid())
+  name         String
+  email        String   @unique
+  password     String
+  confirmed    Boolean  @default(false)
+  confirmToken String   @unique
+  createdAt    DateTime @default(now())
+}
+
+//ZAlhKGONnlw82VkU
+//DIRECT_URL="postgresql://postgres.sndvhyadyzhcwlfofehc:ZAlhKGONnlw82VkU@aws-0-us-west-2.pooler.supabase.com:5432/postgres

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>E-mail Confirmado</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f5f5f5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .card {
+      background: #fff;
+      padding: 48px 40px;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      width: 100%;
+      max-width: 420px;
+      text-align: center;
+    }
+
+    .icon {
+      font-size: 56px;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      font-size: 24px;
+      color: #1a1a2e;
+      margin-bottom: 8px;
+    }
+
+    p {
+      font-size: 14px;
+      color: #888;
+      margin-bottom: 8px;
+    }
+
+    .progress {
+      margin-top: 32px;
+      height: 4px;
+      background: #eee;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .progress-bar {
+      height: 100%;
+      background: #4f46e5;
+      border-radius: 4px;
+      animation: fill 3s linear forwards;
+    }
+
+    @keyframes fill {
+      from { width: 0% }
+      to   { width: 100% }
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="icon">✅</div>
+    <h1>E-mail confirmado!</h1>
+    <p id="welcomeMsg">Bem-vindo ao Tagarelinha!</p>
+    <p>Redirecionando para o app...</p>
+    <div class="progress">
+      <div class="progress-bar"></div>
+    </div>
+  </div>
+
+  <script>
+    // Pega os dados da URL e decodifica
+    const params = new URLSearchParams(window.location.search)
+    const name = decodeURIComponent(params.get('name'))
+    const email = decodeURIComponent(params.get('email'))
+    const id = params.get('id')
+
+    if (name) {
+    document.getElementById('welcomeMsg').textContent = `Olá, ${name}! Bem-vindo ao Tagarelinha! 🎉`
+    }
+
+    // Salva já decodificado no localStorage
+    if (name && email && id) {
+    localStorage.setItem('user', JSON.stringify({ id, name, email }))
+    }
+
+    setTimeout(() => {
+    window.location.href = '/home.html'
+    }, 3000)
+  </script>
+</body>
+</html>

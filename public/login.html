@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f5f5f5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .card {
+      background: #fff;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      width: 100%;
+      max-width: 420px;
+    }
+
+    h1 {
+      font-size: 24px;
+      color: #1a1a2e;
+      margin-bottom: 6px;
+    }
+
+    .subtitle {
+      font-size: 14px;
+      color: #888;
+      margin-bottom: 28px;
+    }
+
+    label {
+      display: block;
+      font-size: 13px;
+      color: #555;
+      margin-bottom: 6px;
+      font-weight: 500;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px 14px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 14px;
+      margin-bottom: 18px;
+      transition: border 0.2s;
+      outline: none;
+    }
+
+    input:focus { border-color: #4f46e5; }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background: #4f46e5;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    button:hover { background: #3730a3; }
+
+    .msg {
+      margin-top: 16px;
+      font-size: 14px;
+      text-align: center;
+      padding: 10px;
+      border-radius: 8px;
+      display: none;
+    }
+
+    .msg.success { background: #d4edda; color: #1a6b3c; display: block; }
+    .msg.error   { background: #fdecea; color: #b91c1c; display: block; }
+
+    .register-link {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 13px;
+      color: #888;
+    }
+
+    .register-link a { color: #4f46e5; text-decoration: none; font-weight: 500; }
+    .register-link a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Entrar</h1>
+    <p class="subtitle">Acesse sua conta</p>
+
+    <label>E-mail</label>
+    <input type="email" id="email" placeholder="seu@email.com" />
+
+    <label>Senha</label>
+    <input type="password" id="password" placeholder="Sua senha" />
+
+    <button onclick="login()">Entrar</button>
+
+    <div class="msg" id="msg"></div>
+
+    <div class="register-link">
+      Não tem conta? <a href="/register.html">Cadastrar</a>
+    </div>
+  </div>
+
+  <script>
+    async function login() {
+      const email = document.getElementById('email').value.trim()
+      const password = document.getElementById('password').value
+      const msg = document.getElementById('msg')
+
+      msg.className = 'msg'
+      msg.textContent = ''
+
+      if (!email || !password) {
+        msg.className = 'msg error'
+        msg.textContent = 'Preencha todos os campos.'
+        return
+      }
+
+      try {
+        const res = await fetch('/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password })
+        })
+
+        const data = await res.json()
+
+        if (res.ok) {
+          // Salva o nome do usuário para usar na home
+          localStorage.setItem('user', JSON.stringify(data.user))
+          window.location.href = '/home.html'
+        } else {
+          msg.className = 'msg error'
+          msg.textContent = data.error || 'Erro ao entrar.'
+        }
+      } catch (e) {
+        msg.className = 'msg error'
+        msg.textContent = 'Erro de conexão com o servidor.'
+      }
+    }
+  </script>
+</body>
+</html>
